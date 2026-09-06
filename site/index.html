@@ -82,13 +82,13 @@
 </a>
 </div>
 </div>
-<!-- Hero Visual (Exploded View Image) -->
+<!-- Hero Visual (Exploded View Image) - Interactive clickable link to #menu -->
 <div class="order-1 lg:order-2 lg:col-span-6 relative flex items-center justify-center">
-<div class="relative w-full max-w-[500px] lg:max-w-none aspect-square rounded-2xl overflow-hidden bg-surface-container-lowest shadow-2xl flex items-center justify-center group">
+<a href="#menu" id="hero-burger-link" aria-label="Ver Onion Burger en el menú" class="relative block w-full max-w-[500px] lg:max-w-none aspect-square rounded-2xl overflow-hidden bg-surface-container-lowest shadow-2xl cursor-pointer group transition-transform duration-300 hover:scale-[1.02]">
 <!-- Automatic Animation Container: Initial frame (onion-burger-1.png) -> Final frame (onion-burger-explode.jpg) -->
-<div class="relative w-full h-full overflow-hidden flex items-center justify-center">
-  <img loading="eager" fetchpriority="high" decoding="async" id="hero-burger-initial" alt="Onion Burger Impacto" class="absolute inset-0 w-full h-full object-contain object-center transition-all duration-1000 ease-in-out opacity-100 scale-100 z-10 p-2" src="assets/images/onion-burger-1.png">
-  <img loading="eager" fetchpriority="high" decoding="async" id="hero-burger-final" alt="Onion Burger Explode - Ingredientes desglosados" class="absolute inset-0 w-full h-full object-contain object-center transition-all duration-1000 ease-in-out opacity-0 scale-95 z-20 p-2" src="assets/images/onion-burger-explode.jpg">
+<div id="hero-burger-anim-container" class="relative w-full h-full overflow-hidden flex items-center justify-center">
+  <img loading="eager" fetchpriority="high" decoding="async" id="hero-burger-initial" alt="Onion Burger Impacto" class="absolute inset-0 w-full h-full object-contain object-center transition-all duration-700 ease-in-out opacity-100 scale-100 z-10 p-2" src="assets/images/onion-burger-1.png">
+  <img loading="eager" fetchpriority="high" decoding="async" id="hero-burger-final" alt="Onion Burger Explode - Ingredientes desglosados" class="absolute inset-0 w-full h-full object-contain object-center transition-all duration-700 ease-in-out opacity-0 scale-95 z-20 p-2" src="assets/images/onion-burger-explode.jpg">
 </div>
 <!-- Exploded Highlight floating tag -->
 <div class="absolute top-6 left-6 bg-surface-container-high/90 backdrop-blur-md px-space-md py-space-2xs rounded-lg shadow-md flex items-center gap-space-xs">
@@ -102,7 +102,7 @@
 <span class="material-symbols-outlined text-[20px]">local_fire_department</span>
 </div>
 </div>
-</div>
+</a>
 </div>
 </div>
 </div>
@@ -769,14 +769,35 @@
 
 
 
+
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    // 1. Automatic Hero Burger Explosion Transition
     const initialImg = document.getElementById("hero-burger-initial");
     const finalImg = document.getElementById("hero-burger-final");
+    const animContainer = document.getElementById("hero-burger-link") || document.getElementById("hero-burger-anim-container");
     
+    let isAnimating = false;
+
+    function playExplodeAnimation() {
+      if (!initialImg || !finalImg) return;
+      // Start from initial frame
+      initialImg.style.opacity = "1";
+      initialImg.style.transform = "scale(1)";
+      finalImg.style.opacity = "0";
+      finalImg.style.transform = "scale(0.95)";
+      
+      // Animate to explode frame
+      setTimeout(() => {
+        initialImg.style.opacity = "0";
+        initialImg.style.transform = "scale(1.06)";
+        
+        finalImg.style.opacity = "1";
+        finalImg.style.transform = "scale(1)";
+      }, 400);
+    }
+
     if (initialImg && finalImg) {
-      // Auto explode smoothly after initial appearance
+      // 1. Automatic explosion on page load
       setTimeout(() => {
         initialImg.style.opacity = "0";
         initialImg.style.transform = "scale(1.06)";
@@ -784,12 +805,18 @@
         finalImg.style.opacity = "1";
         finalImg.style.transform = "scale(1)";
       }, 750);
+
+      // 2. Repeat animation on hover / mouseenter
+      if (animContainer) {
+        animContainer.addEventListener("mouseenter", () => {
+          playExplodeAnimation();
+        });
+      }
     }
 
-    // 2. Lazy Reveal On Scroll using IntersectionObserver
+    // 3. Lazy Reveal On Scroll using IntersectionObserver
     const revealElements = document.querySelectorAll("section, article, .rounded-2xl, .rounded-xl");
-    revealElements.forEach((el, index) => {
-      // Avoid hiding the hero section completely so LCP is instant
+    revealElements.forEach((el) => {
       if (!el.closest("#inicio") && !el.classList.contains("fixed") && !el.classList.contains("sticky")) {
         el.classList.add("reveal-on-scroll");
       }
@@ -815,6 +842,7 @@
     });
   });
 </script>
+
 
 
 </body></html>
