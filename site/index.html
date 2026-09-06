@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Impacto Burger | Sabor Inigualable & Experiencia Gourmet</title>
+  <meta name="description" content="Impacto Burger - Sabor único, ingredientes selectos y atención preferencial. Especialistas en Onion Burger, burgers artesanales, salchipapas y comida rápida gourmet.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              orange: '#FF5A1F',
+              'orange-hover': '#E04810',
+              yellow: '#FABD00',
+              dark: '#131315',
+              'dark-surface': '#1B1B1D',
+              'dark-card': '#201F21',
+              'dark-border': '#353437',
+              gray: '#A1A1AA',
+              light: '#E5E1E4'
+            }
+          },
+          fontFamily: {
+            display: ['"Space Grotesk"', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons & GSAP -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <style>
+    body {
+      background-color: #131315;
+      color: #E5E1E4;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+    }
+    
+    /* Glowing Effects */
+    .glow-orange {
+      box-shadow: 0 0 45px -10px rgba(255, 90, 31, 0.45);
+    }
+    .glow-yellow {
+      box-shadow: 0 0 35px -8px rgba(250, 189, 0, 0.35);
+    }
+    .text-glow {
+      text-shadow: 0 0 20px rgba(255, 90, 31, 0.6);
+    }
+
+    /* Custom Animation Canvas Container */
+    .hero-burger-container {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      border-radius: 2rem;
+      overflow: hidden;
+      background: radial-gradient(circle at center, rgba(255, 90, 31, 0.18) 0%, rgba(19, 19, 21, 0) 70%);
+    }
+
+    .hero-burger-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .hero-burger-explode {
+      opacity: 0;
+      transform: scale(0.92);
+    }
+
+    .hero-burger-container.exploded .hero-burger-base {
+      opacity: 0;
+      transform: scale(1.08);
+    }
+
+    .hero-burger-container.exploded .hero-burger-explode {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Floating Badges */
+    .badge-float {
+      animation: float 4s ease-in-out infinite;
+    }
+    .badge-float-delayed {
+      animation: float 4.5s ease-in-out infinite 1.5s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Pulse wave */
+    @keyframes pulse-ring {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.1); opacity: 0.4; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+    .pulse-glow {
+      animation: pulse-ring 3s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="selection:bg-brand-orange selection:text-white">
+
+  <!-- TOP PROMO BANNER -->
+  <div class="bg-gradient-to-r from-brand-orange via-amber-500 to-brand-orange text-black font-semibold text-xs md:text-sm py-2 px-4 text-center tracking-wide flex items-center justify-center gap-2">
+    <span class="inline-block w-2 h-2 rounded-full bg-black animate-ping"></span>
+    🔥 ¡PIDE HOY Y DESCUBRE LA VERDADERA ONION BURGER ARTESANAL! DOMICILIOS ACTIVOS
+  </div>
+
+  <!-- NAVIGATION BAR -->
+  <header class="sticky top-0 z-50 bg-[#131315]/90 backdrop-blur-md border-b border-brand-dark-border transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#inicio" class="flex items-center gap-3 group">
+        <img src="assets/images/Logo.png" alt="Impacto Burger Logo" class="h-12 w-auto object-contain transition-transform group-hover:scale-105" onerror="this.src='assets/images/logo.svg'">
+        <div class="flex flex-col">
+          <span class="font-display font-extrabold text-xl sm:text-2xl tracking-tighter text-white">IMPACTO <span class="text-brand-orange">BURGER</span></span>
+          <span class="text-[10px] tracking-widest text-brand-gray uppercase font-semibold">Gourmet & Fast Food</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <a href="#inicio" class="text-white hover:text-brand-orange transition-colors">Inicio</a>
+        <a href="#destacado" class="text-brand-gray hover:text-brand-orange transition-colors">Especialidad</a>
+        <a href="#menu" class="text-brand-gray hover:text-brand-orange transition-colors">Menú</a>
+        <a href="#historia" class="text-brand-gray hover:text-brand-orange transition-colors">Nosotras</a>
+        <a href="#testimonios" class="text-brand-gray hover:text-brand-orange transition-colors">Opiniones</a>
+        <a href="#ubicacion" class="text-brand-gray hover:text-brand-orange transition-colors">Ubicación</a>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-3">
+        <a href="#menu" class="hidden sm:inline-flex items-center gap-2 bg-brand-dark-card hover:bg-brand-dark-border text-white px-4 py-2.5 rounded-xl text-sm font-semibold border border-brand-dark-border transition-all">
+          <i data-lucide="utensils" class="w-4 h-4 text-brand-orange"></i>
+          Ver Menú
+        </a>
+        <a href="https://wa.me/573000000000?text=Hola%20Impacto%20Burger,%20quiero%20hacer%20un%20pedido" target="_blank" class="inline-flex items-center gap-2 bg-brand-orange hover:bg-brand-orange-hover text-white px-5 py-2.5 rounded-xl text-sm font-bold glow-orange transition-all transform hover:-translate-y-0.5">
+          <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+          <span>Pedir Ahora</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section id="inicio" class="relative pt-8 pb-16 md:pt-16 md:pb-24 overflow-hidden">
+    <!-- Ambient glow backgrounds -->
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] bg-brand-orange/15 rounded-full blur-[140px] pointer-events-none pulse-glow"></div>
+    <div class="absolute bottom-10 left-10 w-72 h-72 bg-brand-yellow/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Hero Left Column: Copywriting & CTA -->
+        <div class="lg:col-span-7 flex flex-col items-start space-y-6">
+          <div class="inline-flex items-center gap-2 bg-brand-dark-card border border-brand-dark-border/80 px-4 py-1.5 rounded-full">
+            <span class="w-2.5 h-2.5 rounded-full bg-brand-orange"></span>
+            <span class="text-xs font-bold uppercase tracking-wider text-brand-yellow">Especialidad de la Casa</span>
+            <span class="text-xs text-brand-gray">| Receta de Autor</span>
+          </div>
+
+          <h1 class="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-[1.1]">
+            El Verdadero <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange via-amber-400 to-brand-yellow">Impacto de Sabor</span> en Cada Bocado.
+          </h1>
+
+          <p class="text-base sm:text-lg text-brand-gray leading-relaxed max-w-2xl">
+            Creado por dos jóvenes emprendedoras apasionadas por la cocina de autor. Descubre nuestra estrella: la legendaria 
+            <strong class="text-white font-semibold">Onion Burger</strong> con cebolla caramelizada crujiente, carne premium smash y salsa secreta artesanal.
+          </p>
+
+          <!-- Key highlights pills -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 w-full max-w-xl pt-2">
+            <div class="flex items-center gap-2.5 bg-brand-dark-card/70 border border-brand-dark-border p-3 rounded-xl">
+              <i data-lucide="flame" class="w-5 h-5 text-brand-orange"></i>
+              <div>
+                <p class="text-xs font-bold text-white">Carne 100% Angus</p>
+                <p class="text-[11px] text-brand-gray">Sellada al punto</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2.5 bg-brand-dark-card/70 border border-brand-dark-border p-3 rounded-xl">
+              <i data-lucide="sparkles" class="w-5 h-5 text-brand-yellow"></i>
+              <div>
+                <p class="text-xs font-bold text-white">Pan Brioche</p>
+                <p class="text-[11px] text-brand-gray">Horneado a diario</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2.5 bg-brand-dark-card/70 border border-brand-dark-border p-3 rounded-xl col-span-2 sm:col-span-1">
+              <i data-lucide="heart-handshake" class="w-5 h-5 text-brand-orange"></i>
+              <div>
+                <p class="text-xs font-bold text-white">Atención 5★</p>
+                <p class="text-[11px] text-brand-gray">Calidez de autor</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- CTAs -->
+          <div class="flex flex-wrap items-center gap-4 pt-4 w-full sm:w-auto">
+            <a href="https://wa.me/573000000000?text=Hola%20Impacto%20Burger!%20Quiero%20pedir%20la%20Onion%20Burger" target="_blank" class="w-full sm:w-auto text-center px-8 py-4 bg-brand-orange hover:bg-brand-orange-hover text-white font-bold rounded-2xl glow-orange text-base flex items-center justify-center gap-3 transition-all transform hover:-translate-y-1">
+              <i data-lucide="message-circle" class="w-5 h-5"></i>
+              Ordenar por WhatsApp
+            </a>
+            <a href="#menu" class="w-full sm:w-auto text-center px-6 py-4 bg-brand-dark-card hover:bg-brand-dark-border text-white font-semibold rounded-2xl border border-brand-dark-border text-base flex items-center justify-center gap-2 transition-all">
+              Explorar Carta Completa
+              <i data-lucide="arrow-right" class="w-4 h-4 text-brand-orange"></i>
+            </a>
+          </div>
+
+          <!-- Trust Badges -->
+          <div class="flex items-center gap-4 pt-4 border-t border-brand-dark-border/60 w-full">
+            <div class="flex -space-x-2">
+              <span class="w-8 h-8 rounded-full bg-brand-orange flex items-center justify-center text-xs font-bold ring-2 ring-brand-dark">🍔</span>
+              <span class="w-8 h-8 rounded-full bg-brand-yellow flex items-center justify-center text-xs font-bold ring-2 ring-brand-dark">🍟</span>
+              <span class="w-8 h-8 rounded-full bg-amber-600 flex items-center justify-center text-xs font-bold ring-2 ring-brand-dark">🥤</span>
+            </div>
+            <div class="text-xs text-brand-gray">
+              <span class="text-brand-yellow font-bold">★ 4.9/5.0</span> en más de 500+ reseñas de comensales felices.
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Right Column: Animated Exploding Burger Product -->
+        <div class="lg:col-span-5 flex flex-col items-center">
+          
+          <!-- Interactive Burger Showcase Box -->
+          <div class="relative w-full max-w-[460px] group">
+            
+            <!-- Interactive Switch Controls Bar -->
+            <div class="flex items-center justify-between bg-brand-dark-card border border-brand-dark-border p-2 rounded-2xl mb-4 backdrop-blur-sm shadow-xl">
+              <div class="flex items-center gap-2 px-2">
+                <i data-lucide="sparkle" class="w-4 h-4 text-brand-orange"></i>
+                <span class="text-xs font-bold text-white uppercase tracking-wider">Modo Vista de Capas</span>
+              </div>
+              <div class="flex gap-1 bg-[#131315] p-1 rounded-xl border border-brand-dark-border">
+                <button id="btn-view-burger" onclick="setBurgerState('base')" class="px-3 py-1 text-xs font-bold rounded-lg bg-brand-orange text-white transition-all shadow">
+                  Completa
+                </button>
+                <button id="btn-view-explode" onclick="setBurgerState('explode')" class="px-3 py-1 text-xs font-bold rounded-lg text-brand-gray hover:text-white transition-all">
+                  💥 Explotada (Capas)
+                </button>
+              </div>
+            </div>
+
+            <!-- Burger Canvas / Image Box -->
+            <div id="hero-burger" class="hero-burger-container border border-brand-dark-border/80 shadow-2xl cursor-pointer" onclick="toggleBurgerState()" title="Haz clic para alternar la vista de capas de la hamburguesa">
+              <!-- Frame 1: Base Burger -->
+              <img src="assets/images/onion-burger-1.png" alt="Onion Burger Impacto" class="hero-burger-img hero-burger-base z-10 p-2">
+              <!-- Frame 2: Exploded Burger -->
+              <img src="assets/images/onion-burger-explode.jpg" alt="Onion Burger Desglose de Ingredientes" class="hero-burger-img hero-burger-explode z-20 p-2">
+              
+              <!-- Tap overlay indicator for mobile -->
+              <div class="absolute bottom-3 left-1/2 -translate-x-1/2 z-30 bg-black/70 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 text-[11px] font-medium text-brand-light flex items-center gap-1.5 opacity-90 transition-opacity pointer-events-none">
+                <i data-lucide="touchpad" class="w-3.5 h-3.5 text-brand-yellow"></i>
+                <span>Toca o pasa el cursor para explotar</span>
+              </div>
+            </div>
+
+            <!-- Interactive Exploded Layer Tags (Visible when exploded) -->
+            <div id="layer-badges" class="mt-4 grid grid-cols-2 gap-2 text-xs transition-opacity duration-300">
+              <div class="bg-brand-dark-card/90 border border-brand-orange/30 p-2.5 rounded-xl flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-brand-orange"></span>
+                <div>
+                  <p class="font-bold text-white text-[12px]">Pan Brioche Artesanal</p>
+                  <p class="text-[10px] text-brand-gray">Dorado con mantequilla</p>
+                </div>
+              </div>
+              <div class="bg-brand-dark-card/90 border border-brand-yellow/30 p-2.5 rounded-xl flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-brand-yellow"></span>
+                <div>
+                  <p class="font-bold text-white text-[12px]">Onion Rings & Crispy</p>
+                  <p class="text-[10px] text-brand-gray">Cebolla crujiente especial</p>
+                </div>
+              </div>
+              <div class="bg-brand-dark-card/90 border border-amber-500/30 p-2.5 rounded-xl flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                <div>
+                  <p class="font-bold text-white text-[12px]">Queso Cheddar Fundido</p>
+                  <p class="text-[10px] text-brand-gray">Doble capa cremosa</p>
+                </div>
+              </div>
+              <div class="bg-brand-dark-card/90 border border-red-500/30 p-2.5 rounded-xl flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-red-500"></span>
+                <div>
+                  <p class="font-bold text-white text-[12px]">Carne Angus Premium</p>
+                  <p class="text-[10px] text-brand-gray">Jugosidad garantizada</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HIGHLIGHT PRODUCT SECTION -->
+  <section id="destacado" class="py-16 bg-brand-dark-surface border-y border-brand-dark-border relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-brand-orange font-bold text-xs uppercase tracking-widest bg-brand-orange/10 px-3 py-1 rounded-full border border-brand-orange/20">
+          La Joya de la Corona
+        </span>
+        <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white mt-3 mb-4">
+          ¿Por qué la <span class="text-brand-yellow">Onion Burger</span> es Legendaria?
+        </h2>
+        <p class="text-brand-gray text-sm sm:text-base">
+          Desarrollada minuciosamente tras meses de pruebas por nuestras chefs creadoras. Una explosión de texturas que combina el dulzor de la cebolla caramelizada con el crujiente de aros artesanales.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Feature 1 -->
+        <div class="bg-brand-dark-card p-6 rounded-2xl border border-brand-dark-border hover:border-brand-orange/50 transition-all group">
+          <div class="w-12 h-12 rounded-xl bg-brand-orange/15 text-brand-orange flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+            <i data-lucide="layers" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-display font-bold text-lg text-white mb-2">Doble Textura de Cebolla</h3>
+          <p class="text-brand-gray text-xs sm:text-sm leading-relaxed">
+            Combinamos cebolla en reducción caramelizada a fuego lento y aros de cebolla crocantes para un contraste inigualable.
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="bg-brand-dark-card p-6 rounded-2xl border border-brand-dark-border hover:border-brand-yellow/50 transition-all group">
+          <div class="w-12 h-12 rounded-xl bg-brand-yellow/15 text-brand-yellow flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+            <i data-lucide="shield-check" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-display font-bold text-lg text-white mb-2">Ingredientes 100% Frescos</h3>
+          <p class="text-brand-gray text-xs sm:text-sm leading-relaxed">
+            Nada de carnes procesadas ni congelados industriales. Molida fresca cada mañana y sazonada con nuestra receta secreta.
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="bg-brand-dark-card p-6 rounded-2xl border border-brand-dark-border hover:border-amber-500/50 transition-all group">
+          <div class="w-12 h-12 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+            <i data-lucide="award" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-display font-bold text-lg text-white mb-2">Salsa de la Casa</h3>
+          <p class="text-brand-gray text-xs sm:text-sm leading-relaxed">
+            Emulsión de pimientos ahumados y especias finas creada exclusivamente para acompañar la Onion Burger.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- INTERACTIVE MENU SECTION -->
+  <section id="menu" class="py-20 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+        <div>
+          <span class="text-brand-orange font-bold text-xs uppercase tracking-widest bg-brand-orange/10 px-3 py-1 rounded-full border border-brand-orange/20">
+            Nuestra Carta
+          </span>
+          <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white mt-3">
+            Menú <span class="text-brand-orange">Impacto</span>
+          </h2>
+          <p class="text-brand-gray text-sm mt-1">Explora nuestras hamburguesas, especialidades y combinaciones gourmet.</p>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap gap-2 p-1.5 bg-brand-dark-surface rounded-2xl border border-brand-dark-border self-start md:self-auto">
+          <button onclick="filterMenu('todos')" class="menu-tab-btn px-4 py-2 text-xs sm:text-sm font-bold rounded-xl bg-brand-orange text-white transition-all shadow" data-category="todos">
+            Todos
+          </button>
+          <button onclick="filterMenu('hamburguesas')" class="menu-tab-btn px-4 py-2 text-xs sm:text-sm font-bold rounded-xl text-brand-gray hover:text-white transition-all" data-category="hamburguesas">
+            Hamburguesas
+          </button>
+          <button onclick="filterMenu('especiales')" class="menu-tab-btn px-4 py-2 text-xs sm:text-sm font-bold rounded-xl text-brand-gray hover:text-white transition-all" data-category="especiales">
+            Especialidades & Boom
+          </button>
+          <button onclick="filterMenu('otros')" class="menu-tab-btn px-4 py-2 text-xs sm:text-sm font-bold rounded-xl text-brand-gray hover:text-white transition-all" data-category="otros">
+            Perros & Plancha
+          </button>
+        </div>
+      </div>
+
+      <!-- Menu Grid -->
+      <div id="menu-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Item 1: Onion Burger Sencilla (Top Star) -->
+        <div class="menu-card bg-brand-dark-card rounded-2xl border border-brand-orange/40 overflow-hidden group hover:border-brand-orange transition-all flex flex-col justify-between" data-category="hamburguesas">
+          <div class="relative h-56 overflow-hidden bg-black/40">
+            <span class="absolute top-3 right-3 z-10 bg-brand-orange text-white text-[11px] font-extrabold px-3 py-1 rounded-full shadow-lg">
+              ★ MÁS VENDIDA
+            </span>
+            <img src="assets/images/onion-burger-1.png" alt="Onion Burguer" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="font-display font-bold text-lg text-white">Onion Burguer</h3>
+                <span class="font-display font-extrabold text-brand-orange text-lg">$22.000</span>
+              </div>
+              <p class="text-brand-gray text-xs leading-relaxed mb-4">
+                Carne 100% Angus 150g, aros de cebolla crocantes, cebolla caramelizada, queso cheddar doble y salsa especial de la casa en pan brioche.
+              </p>
+            </div>
+            <a href="https://wa.me/573000000000?text=Hola,%20quiero%20pedir%20la%20Onion%20Burguer%20Sencilla" target="_blank" class="w-full py-2.5 bg-brand-dark-surface hover:bg-brand-orange text-white text-xs font-bold rounded-xl border border-brand-dark-border hover:border-brand-orange flex items-center justify-center gap-2 transition-all">
+              <i data-lucide="plus" class="w-4 h-4"></i> Pedir por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <!-- Item 2: Onion Burger Doble Carne -->
+        <div class="menu-card bg-brand-dark-card rounded-2xl border border-brand-dark-border overflow-hidden group hover:border-brand-orange transition-all flex flex-col justify-between" data-category="hamburguesas">
+          <div class="relative h-56 overflow-hidden bg-black/40">
+            <span class="absolute top-3 right-3 z-10 bg-brand-yellow text-black text-[11px] font-extrabold px-3 py-1 rounded-full shadow-lg">
+              🔥 DOBLE IMPACTO
+            </span>
+            <img src="assets/images/Onion_Burguer_doble_carne.jpg" alt="Onion Burguer Doble Carne" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="font-display font-bold text-lg text-white">Onion Doble Carne</h3>
+                <span class="font-display font-extrabold text-brand-orange text-lg">$28.000</span>
+              </div>
+              <p class="text-brand-gray text-xs leading-relaxed mb-4">
+                Doble carne artesanal 300g de puro sabor, cuádruple queso cheddar derretido, sobredosis de aros y cebolla dulce.
+              </p>
+            </div>
+            <a href="https://wa.me/573000000000?text=Hola,%20quiero%20pedir%20la%20Onion%20Burger%20Doble%20Carne" target="_blank" class="w-full py-2.5 bg-brand-dark-surface hover:bg-brand-orange text-white text-xs font-bold rounded-xl border border-brand-dark-border hover:border-brand-orange flex items-center justify-center gap-2 transition-all">
+              <i data-lucide="plus" class="w-4 h-4"></i> Pedir por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <!-- Item 3: Grilled Cheese Burger -->
+        <div class="menu-card bg-brand-dark-card rounded-2xl border border-brand-dark-border overflow-hidden group hover:border-brand-orange transition-all flex flex-col justify-between" data-category="hamburguesas">
+          <div class="relative h-56 overflow-hidden bg-black/40">
+            <img src="assets/images/Grilled_Cheese_Burger.jpg" alt="Grilled Cheese Burger" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="font-display font-bold text-lg text-white">Grilled Cheese Burger</h3>
+                <span class="font-display font-extrabold text-brand-orange text-lg">$24.000</span>
+              </div>
+              <p class="text-brand-gray text-xs leading-relaxed mb-4">
+                Pan brioche tostado a la plancha con costra de queso mozarella y cheddar, tocineta ahumada y carne jugosa.
+              </p>
+            </div>
+            <a href="https://wa.me/573000000000?text=Hola,%20quiero%20pedir%20la%20Grilled%20Cheese%20Burger" target="_blank" class="w-full py-2.5 bg-brand-dark-surface hover:bg-brand-orange text-white text-xs font-bold rounded-xl border border-brand-dark-border hover:border-brand-orange flex items-center justify-center gap-2 transition-all">
+              <i data-lucide="plus" class="w-4 h-4"></i> Pedir por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <!-- Item 4: Mexi Burguer -->
+        <div class="menu-card bg-brand-dark-card rounded-2xl border border-brand-dark-border overflow-hidden group hover:border-brand-orange transition-all flex flex-col justify-between" data-category="hamburguesas">
+          <div class="relative h-56 overflow-hidden bg-black/40">
+            <img src="assets/images/Mexi_Burguer.jpg" alt="Mexi Burguer" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="font-display font-bold text-lg text-white">Mexi Burguer</h3>
+                <span class="font-display font-extrabold text-brand-orange text-lg">$23.500</span>
+              </div>
+              <p class="text-brand-gray text-xs leading-relaxed mb-4">
+                Toque picante gourmet con guacamole artesanal, jalapeños suaves, totopos crujientes y queso fundido.
+              </p>
+            </div>
+            <a href="https://wa.me/573000000000?text=Hola,%20quiero%20pedir%20la%20Mexi%20Burguer" target="_blank" class="w-full py-2.5 bg-brand-dark-surface hover:bg-brand-orange text-white text-xs font-bold rounded-xl border border-brand-dark-border hover:border-brand-orange flex items-center justify-center gap-2 transition-all">
+              <i data-lucide="plus" class="w-4 h-4"></i> Pedir por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <!-- Item 5: Hawaiana Burger -->
+        <div class="menu-card bg-brand-dark-card rounded-2xl border border-brand-dark-border overflow-hidden group hover:border-brand-orange transition-all flex flex-col justify-between" data-category="hamburguesas">
+          <div class="relative h-56 overflow-hidden bg-black/40">
+            <img src="assets/images/Hawaiana_Burger.jpg" alt="Hawaiana Burger" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="font-display font-bold text-lg text-white">Hawaiana Burger</h3>
+                <span class="font-display font-extrabold text-brand-orange text-lg">$21.000</span>
+              </div>
+              <p class="text-brand-gray text-xs leading-relaxed mb-4">
+                Rodaja de piña asada al grill caramelizada, jamón artesanal, queso mozzarella y tocineta crocante.
+              </p>
+            </div>
+            <a href="https://wa.me/573000000000?text=Hola,%20quiero%20pedir%20la%20Hawaiana%20Burger" target="_blank" class="w-full py-2.5 bg-brand-dark-surface hover:bg-brand-orange text-white text-xs font-bold rounded-xl border border-brand-dark-border hover:border-brand-orange flex items-center justify-center gap-2 transition-all">
+              <i data-lucide="plus" class="w-4 h-4"></i> Pedir por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <!-- Item 6: Cheese Burguer Clásica -->
+        <div class="menu-card bg-brand-dark-card rounded-2xl border border-brand-dark-border overflow-hidden group hover:border-brand-orange transition-all flex flex-col justify-between" data-category="hamburguesas">
+          <div class="relative h-56 overflow-hidden bg-black/40">
+            <img src="assets/images/Cheese_Burguer.jpg" alt="Cheese Burguer" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="font-display font-bold text-lg text-white">Cheese Burguer</h3>
+                <span class="font-display font-extrabold text-brand-orange text-lg">$19.500</span>
+              </div>
+              <p class="text-brand-gray text-xs leading-relaxed mb-4">
+                La clásica irresistible: carne selecta, queso cheddar americano, lechuga romana fresca, tomate y pepinillos.
+              </p>
+            </div>
+            <a href="https://wa.me/573000000000?text=Hola,%20quiero%20pedir%20la%20Cheese%20Burguer" target="_blank" class="w-full py-2.5 bg-brand-dark-surface hover:bg-brand-orange text-white text-xs font-bold rounded-xl border border-brand-dark-border hover:border-brand-orange flex items-center justify-center gap-2 transition-all">
+              <i data-lucide="plus" class="w-4 h-4"></i> Pedir por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <!-- Item 7: Sachi Boom -->
+        <div class="menu-card bg-brand-dark-card rounded-2xl border border-brand-dark-border overflow-hidden group hover:border-brand-yellow transition-all flex flex-col justify-between" data-category="especiales">
+          <div class="relative h-56 overflow-hidden bg-black/40">
+            <span class="absolute top-3 right-3 z-10 bg-brand-yellow text-black text-[11px] font-extrabold px-3 py-1 rounded-full shadow-lg">
+              🍟 FAVORITO PARA COMPARTIR
+            </span>
+            <img src="assets/images/Sachi_Boom.jpg" alt="Sachi Boom" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="font-display font-bold text-lg text-white">Sachi Boom</h3>
+                <span class="font-display font-extrabold text-brand-orange text-lg">$25.000</span>
+              </div>
+              <p class="text-brand-gray text-xs leading-relaxed mb-4">
+                Papas a la francesa doradas, salchicha premium, carne desmechada jugosa, tocineta, queso gratinado y lluvia de ripio.
+              </p>
+            </div>
+            <a href="https://wa.me/573000000000?text=Hola,%20quiero%20pedir%20la%20Sachi%20Boom" target="_blank" class="w-full py-2.5 bg-brand-dark-surface hover:bg-brand-orange text-white text-xs font-bold rounded-xl border border-brand-dark-border hover:border-brand-orange flex items-center justify-center gap-2 transition-all">
+              <i data-lucide="plus" class="w-4 h-4"></i> Pedir por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <!-- Item 8: Mini Boom -->
+        <div class="menu-card bg-brand-dark-card rounded-2xl border border-brand-dark-border overflow-hidden group hover:border-brand-yellow transition-all flex flex-col justify-between" data-category="especiales">
+          <div class="relative h-56 overflow-hidden bg-black/40">
+            <img src="assets/images/Mini_Boom.jpg" alt="Mini Boom" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="font-display font-bold text-lg text-white">Mini Boom</h3>
+                <span class="font-display font-extrabold text-brand-orange text-lg">$16.000</span>
+              </div>
+              <p class="text-brand-gray text-xs leading-relaxed mb-4">
+                La porción personal perfecta: papas rústicas, salchicha artesanal picada, queso fundido y toques de tocineta.
+              </p>
+            </div>
+            <a href="https://wa.me/573000000000?text=Hola,%20quiero%20pedir%20el%20Mini%20Boom" target="_blank" class="w-full py-2.5 bg-brand-dark-surface hover:bg-brand-orange text-white text-xs font-bold rounded-xl border border-brand-dark-border hover:border-brand-orange flex items-center justify-center gap-2 transition-all">
+              <i data-lucide="plus" class="w-4 h-4"></i> Pedir por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <!-- Item 9: Hot Dog Especial -->
+        <div class="menu-card bg-brand-dark-card rounded-2xl border border-brand-dark-border overflow-hidden group hover:border-brand-orange transition-all flex flex-col justify-between" data-category="otros">
+          <div class="relative h-56 overflow-hidden bg-black/40">
+            <img src="assets/images/Hot_Dog.jpg" alt="Hot Dog Especial" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="font-display font-bold text-lg text-white">Hot Dog Especial</h3>
+                <span class="font-display font-extrabold text-brand-orange text-lg">$15.000</span>
+              </div>
+              <p class="text-brand-gray text-xs leading-relaxed mb-4">
+                Salchicha tipo Frankfurt de gran calibre, queso fundido, tocineta crujiente, ripio de papa y salsas de la casa.
+              </p>
+            </div>
+            <a href="https://wa.me/573000000000?text=Hola,%20quiero%20pedir%20el%20Hot%20Dog%20Especial" target="_blank" class="w-full py-2.5 bg-brand-dark-surface hover:bg-brand-orange text-white text-xs font-bold rounded-xl border border-brand-dark-border hover:border-brand-orange flex items-center justify-center gap-2 transition-all">
+              <i data-lucide="plus" class="w-4 h-4"></i> Pedir por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <!-- Item 10: Pechuga a la Plancha -->
+        <div class="menu-card bg-brand-dark-card rounded-2xl border border-brand-dark-border overflow-hidden group hover:border-brand-orange transition-all flex flex-col justify-between" data-category="otros">
+          <div class="relative h-56 overflow-hidden bg-black/40">
+            <img src="assets/images/Pechuga_a_la_plancha.jpg" alt="Pechuga a la Plancha" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="font-display font-bold text-lg text-white">Pechuga a la Plancha</h3>
+                <span class="font-display font-extrabold text-brand-orange text-lg">$20.000</span>
+              </div>
+              <p class="text-brand-gray text-xs leading-relaxed mb-4">
+                Filete de pechuga marinada a las finas hierbas asada al punto jugoso, servida con papas y ensalada fresca.
+              </p>
+            </div>
+            <a href="https://wa.me/573000000000?text=Hola,%20quiero%20pedir%20la%20Pechuga%20a%20la%20Plancha" target="_blank" class="w-full py-2.5 bg-brand-dark-surface hover:bg-brand-orange text-white text-xs font-bold rounded-xl border border-brand-dark-border hover:border-brand-orange flex items-center justify-center gap-2 transition-all">
+              <i data-lucide="plus" class="w-4 h-4"></i> Pedir por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <!-- Item 11: Menú Infantil -->
+        <div class="menu-card bg-brand-dark-card rounded-2xl border border-brand-dark-border overflow-hidden group hover:border-brand-orange transition-all flex flex-col justify-between" data-category="otros">
+          <div class="relative h-56 overflow-hidden bg-black/40">
+            <img src="assets/images/Menu__infantil.jpg" alt="Menú Infantil" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="font-display font-bold text-lg text-white">Menú Infantil</h3>
+                <span class="font-display font-extrabold text-brand-orange text-lg">$14.000</span>
+              </div>
+              <p class="text-brand-gray text-xs leading-relaxed mb-4">
+                Hamburguesa kids suave o nuggets crocantes con papitas sonrientes y jugo para consentir a los pequeños.
+              </p>
+            </div>
+            <a href="https://wa.me/573000000000?text=Hola,%20quiero%20pedir%20el%20Men%C3%BA%20Infantil" target="_blank" class="w-full py-2.5 bg-brand-dark-surface hover:bg-brand-orange text-white text-xs font-bold rounded-xl border border-brand-dark-border hover:border-brand-orange flex items-center justify-center gap-2 transition-all">
+              <i data-lucide="plus" class="w-4 h-4"></i> Pedir por WhatsApp
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- NOSOTRAS / HISTORIA SECTION -->
+  <section id="historia" class="py-16 bg-brand-dark-surface border-y border-brand-dark-border relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left Column: Story Images Collage -->
+        <div class="lg:col-span-5 grid grid-cols-2 gap-4">
+          <div class="space-y-4">
+            <img src="assets/images/Carta_1.JPG" alt="Impacto Burger Carta Detalle" class="rounded-2xl border border-brand-dark-border object-cover h-48 w-full shadow-lg">
+            <img src="assets/images/80d80518-fd32-436a-b55c-b484b43d056e.JPG" alt="Impacto Burger Cocina" class="rounded-2xl border border-brand-dark-border object-cover h-64 w-full shadow-lg">
+          </div>
+          <div class="space-y-4 pt-6">
+            <img src="assets/images/e77ee54f-f805-4d3c-b9cc-d15841b41814.JPG" alt="Impacto Burger Local" class="rounded-2xl border border-brand-dark-border object-cover h-64 w-full shadow-lg">
+            <img src="assets/images/Carta_2.JPG" alt="Impacto Burger Menú Físico" class="rounded-2xl border border-brand-dark-border object-cover h-48 w-full shadow-lg">
+          </div>
+        </div>
+
+        <!-- Right Column: Story Text -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2 bg-brand-orange/10 border border-brand-orange/20 px-3 py-1 rounded-full text-brand-orange text-xs font-bold uppercase tracking-wider">
+            Nuestra Esencia
+          </div>
+          <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white">
+            Pasión, Sabor y Emprendimiento Femenino
+          </h2>
+          <p class="text-brand-gray text-sm sm:text-base leading-relaxed">
+            <strong class="text-white">Impacto Burger</strong> nace del sueño y visión de dos jóvenes emprendedoras apasionadas por complacer los paladares más exigentes. 
+            Cansadas de las típicas hamburguesas industriales, decidieron experimentar con recetas caseras, especias de autor y técnicas de sellado a alta temperatura hasta dar con la combinación perfecta.
+          </p>
+          <p class="text-brand-gray text-sm sm:text-base leading-relaxed">
+            Cada plato que sale de nuestra cocina lleva nuestro sello de dedicación, calidad en cada ingrediente y una atención cálida y cercana que te hace sentir como en casa.
+          </p>
+
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-2">
+            <div class="bg-brand-dark-card p-4 rounded-xl border border-brand-dark-border text-center">
+              <span class="font-display font-extrabold text-2xl sm:text-3xl text-brand-orange block">100%</span>
+              <span class="text-xs text-brand-gray">Carne Fresca Diaria</span>
+            </div>
+            <div class="bg-brand-dark-card p-4 rounded-xl border border-brand-dark-border text-center">
+              <span class="font-display font-extrabold text-2xl sm:text-3xl text-brand-yellow block">+500</span>
+              <span class="text-xs text-brand-gray">Burgers Servidas / Mes</span>
+            </div>
+            <div class="bg-brand-dark-card p-4 rounded-xl border border-brand-dark-border text-center col-span-2 sm:col-span-1">
+              <span class="font-display font-extrabold text-2xl sm:text-3xl text-amber-500 block">5.0 ★</span>
+              <span class="text-xs text-brand-gray">Calidad y Servicio</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS SECTION -->
+  <section id="testimonios" class="py-20 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="text-brand-orange font-bold text-xs uppercase tracking-widest bg-brand-orange/10 px-3 py-1 rounded-full border border-brand-orange/20">
+          Lo que dicen nuestros clientes
+        </span>
+        <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white mt-3">
+          Amor a Primer <span class="text-brand-orange">Bocado</span>
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Review 1 -->
+        <div class="bg-brand-dark-card p-6 rounded-2xl border border-brand-dark-border flex flex-col justify-between hover:border-brand-orange/40 transition-all">
+          <div>
+            <div class="flex text-brand-yellow gap-1 mb-3">
+              ★★★★★
+            </div>
+            <p class="text-xs sm:text-sm text-brand-light leading-relaxed italic mb-4">
+              "La Onion Burger es otro nivel. Los aros de cebolla son súper crujientes y la salsa tiene un sabor adictivo. ¡La mejor hamburguesa que he probado este año!"
+            </p>
+          </div>
+          <div class="flex items-center gap-3 pt-3 border-t border-brand-dark-border">
+            <div class="w-10 h-10 rounded-full bg-brand-orange/20 text-brand-orange font-bold flex items-center justify-center text-sm">
+              CM
+            </div>
+            <div>
+              <p class="text-xs font-bold text-white">Carlos Mendoza</p>
+              <p class="text-[11px] text-brand-gray">Cliente Frecuente</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="bg-brand-dark-card p-6 rounded-2xl border border-brand-dark-border flex flex-col justify-between hover:border-brand-orange/40 transition-all">
+          <div>
+            <div class="flex text-brand-yellow gap-1 mb-3">
+              ★★★★★
+            </div>
+            <p class="text-xs sm:text-sm text-brand-light leading-relaxed italic mb-4">
+              "Pedimos la Sachi Boom para compartir y nos encantó la cantidad y frescura del queso. Además la atención de las chicas es excelente y súper rápida."
+            </p>
+          </div>
+          <div class="flex items-center gap-3 pt-3 border-t border-brand-dark-border">
+            <div class="w-10 h-10 rounded-full bg-brand-yellow/20 text-brand-yellow font-bold flex items-center justify-center text-sm">
+              VR
+            </div>
+            <div>
+              <p class="text-xs font-bold text-white">Valentina Rodríguez</p>
+              <p class="text-[11px] text-brand-gray">Foodie Local</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="bg-brand-dark-card p-6 rounded-2xl border border-brand-dark-border flex flex-col justify-between hover:border-brand-orange/40 transition-all">
+          <div>
+            <div class="flex text-brand-yellow gap-1 mb-3">
+              ★★★★★
+            </div>
+            <p class="text-xs sm:text-sm text-brand-light leading-relaxed italic mb-4">
+              "El pan brioche es suave y la carne jugosa en su punto justo. Excelente relación calidad-precio. Totalmente recomendado el servicio a domicilio."
+            </p>
+          </div>
+          <div class="flex items-center gap-3 pt-3 border-t border-brand-dark-border">
+            <div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-400 font-bold flex items-center justify-center text-sm">
+              AR
+            </div>
+            <div>
+              <p class="text-xs font-bold text-white">Andrés Ramírez</p>
+              <p class="text-[11px] text-brand-gray">Comensal Verificado</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- UBICACIÓN & CONTACTO SECTION -->
+  <section id="ubicacion" class="py-16 bg-brand-dark-surface border-t border-brand-dark-border relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <!-- Info Column -->
+        <div class="lg:col-span-5 space-y-6">
+          <span class="text-brand-orange font-bold text-xs uppercase tracking-widest bg-brand-orange/10 px-3 py-1 rounded-full border border-brand-orange/20">
+            Visítanos o Pide a Domicilio
+          </span>
+          <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white">
+            ¿Dónde Encontrarnos?
+          </h2>
+          <p class="text-brand-gray text-sm leading-relaxed">
+            Ven y vive la experiencia Impacto en nuestro local o pide cómodamente a domicilio y recibe tu comida caliente y crujiente.
+          </p>
+
+          <div class="space-y-4">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-brand-orange/15 text-brand-orange flex items-center justify-center shrink-0">
+                <i data-lucide="map-pin" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-white text-sm">Ubicación</h4>
+                <p class="text-brand-gray text-xs">Zona Gastronómica Principal, Local Impacto Burger</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-brand-yellow/15 text-brand-yellow flex items-center justify-center shrink-0">
+                <i data-lucide="clock" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-white text-sm">Horario de Atención</h4>
+                <p class="text-brand-gray text-xs">Miércoles a Domingo: 5:00 PM - 11:30 PM</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-400 flex items-center justify-center shrink-0">
+                <i data-lucide="phone" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-white text-sm">Línea de Pedidos</h4>
+                <p class="text-brand-gray text-xs">WhatsApp directo para domicilios y reservas</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-2 flex flex-wrap gap-3">
+            <a href="https://maps.google.com/?q=Impacto+Burger" target="_blank" class="px-5 py-3 bg-brand-orange hover:bg-brand-orange-hover text-white text-xs font-bold rounded-xl glow-orange flex items-center gap-2 transition-all">
+              <i data-lucide="map" class="w-4 h-4"></i> Abrir en Google Maps
+            </a>
+            <a href="https://wa.me/573000000000" target="_blank" class="px-5 py-3 bg-brand-dark-card hover:bg-brand-dark-border text-white text-xs font-bold rounded-xl border border-brand-dark-border flex items-center gap-2 transition-all">
+              <i data-lucide="message-square" class="w-4 h-4 text-emerald-400"></i> Chatear con Asesora
+            </a>
+          </div>
+        </div>
+
+        <!-- Interactive Map Placeholder / Visual -->
+        <div class="lg:col-span-7 bg-brand-dark-card rounded-2xl border border-brand-dark-border overflow-hidden relative h-[380px] flex items-center justify-center group">
+          <!-- Stylized map background simulation -->
+          <div class="absolute inset-0 bg-[#161619] opacity-80" style="background-image: radial-gradient(#353437 1px, transparent 1px); background-size: 24px 24px;"></div>
+          
+          <!-- Map Marker Card -->
+          <div class="relative z-10 bg-brand-dark-surface/95 backdrop-blur-md p-6 rounded-2xl border border-brand-orange/40 max-w-sm text-center shadow-2xl">
+            <div class="w-12 h-12 rounded-full bg-brand-orange text-white flex items-center justify-center mx-auto mb-3 glow-orange">
+              <i data-lucide="map-pin" class="w-6 h-6"></i>
+            </div>
+            <h3 class="font-display font-bold text-lg text-white">Impacto Burger Gourmet</h3>
+            <p class="text-brand-gray text-xs mt-1 mb-4">¡Te esperamos para consentirte con el mejor sabor y atención!</p>
+            <a href="https://maps.google.com/?q=Impacto+Burger" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-brand-orange text-white text-xs font-bold rounded-xl shadow transition-transform hover:scale-105">
+              <span>Cómo Llegar</span>
+              <i data-lucide="navigation" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-[#0e0e10] border-t border-brand-dark-border py-12 text-brand-gray text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+      
+      <div class="flex items-center gap-3">
+        <img src="assets/images/Logo.png" alt="Impacto Burger" class="h-8 w-auto object-contain" onerror="this.src='assets/images/logo.svg'">
+        <div>
+          <span class="text-white font-display font-bold">IMPACTO BURGER</span> &copy; <span id="year">2026</span>. Todos los derechos reservados.
+        </div>
+      </div>
+
+      <div class="flex items-center gap-6">
+        <a href="#inicio" class="hover:text-white transition-colors">Inicio</a>
+        <a href="#menu" class="hover:text-white transition-colors">Menú</a>
+        <a href="#ubicacion" class="hover:text-white transition-colors">Ubicación</a>
+        <a href="https://wa.me/573000000000" target="_blank" class="hover:text-brand-orange transition-colors">WhatsApp</a>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- FLOATING WHATSAPP BUTTON -->
+  <a href="https://wa.me/573000000000?text=Hola%20Impacto%20Burger,%20quiero%20hacer%20un%20pedido" target="_blank" class="fixed bottom-6 right-6 z-50 bg-[#25D366] hover:bg-[#20ba59] text-white p-3.5 rounded-full shadow-2xl flex items-center justify-center transition-all transform hover:scale-110 hover:-translate-y-1 focus:outline-none ring-4 ring-emerald-500/30" title="Chatear por WhatsApp">
+    <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24">
+      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+    </svg>
+  </a>
+
+  <!-- SCRIPT LOGIC -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Set Dynamic Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Hero Burger State Toggle (Base vs Exploded)
+    const burgerContainer = document.getElementById('hero-burger');
+    const btnBase = document.getElementById('btn-view-burger');
+    const btnExplode = document.getElementById('btn-view-explode');
+
+    function setBurgerState(state) {
+      if (state === 'explode') {
+        burgerContainer.classList.add('exploded');
+        btnExplode.classList.add('bg-brand-orange', 'text-white');
+        btnExplode.classList.remove('text-brand-gray');
+        btnBase.classList.remove('bg-brand-orange', 'text-white');
+        btnBase.classList.add('text-brand-gray');
+      } else {
+        burgerContainer.classList.remove('exploded');
+        btnBase.classList.add('bg-brand-orange', 'text-white');
+        btnBase.classList.remove('text-brand-gray');
+        btnExplode.classList.remove('bg-brand-orange', 'text-white');
+        btnExplode.classList.add('text-brand-gray');
+      }
+    }
+
+    function toggleBurgerState() {
+      if (burgerContainer.classList.contains('exploded')) {
+        setBurgerState('base');
+      } else {
+        setBurgerState('explode');
+      }
+    }
+
+    // Auto hover trigger on desktop
+    burgerContainer.addEventListener('mouseenter', () => setBurgerState('explode'));
+    burgerContainer.addEventListener('mouseleave', () => setBurgerState('base'));
+
+    // Filter Menu Tab Logic
+    function filterMenu(category) {
+      const buttons = document.querySelectorAll('.menu-tab-btn');
+      buttons.forEach(btn => {
+        if (btn.getAttribute('data-category') === category) {
+          btn.classList.add('bg-brand-orange', 'text-white', 'shadow');
+          btn.classList.remove('text-brand-gray');
+        } else {
+          btn.classList.remove('bg-brand-orange', 'text-white', 'shadow');
+          btn.classList.add('text-brand-gray');
+        }
+      });
+
+      const cards = document.querySelectorAll('.menu-card');
+      cards.forEach(card => {
+        const itemCat = card.getAttribute('data-category');
+        if (category === 'todos' || itemCat === category) {
+          card.style.display = 'flex';
+          gsap.fromTo(card, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.35 });
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

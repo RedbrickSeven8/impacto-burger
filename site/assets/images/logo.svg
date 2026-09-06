@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 240" width="600" height="240" fill="none">
+  <!-- Flame Graphic on the right side of typography matching Logo.JPG -->
+  <g transform="translate(370, 20)">
+    <!-- Base flame glow / shape -->
+    <path d="M52 148C52 148 48 135 52 125C56 115 65 108 67 98C69 88 65 78 58 68C58 68 64 74 65 82C66 90 62 98 58 106C54 114 50 122 52 130C54 138 60 144 60 144C60 144 45 138 40 120C35 102 42 85 48 70C54 55 58 40 50 25C48 21 44 15 44 15C44 15 48 24 47 34C46 44 40 52 35 62C30 72 26 84 28 98C30 112 38 126 38 126C38 126 28 116 26 102C24 88 28 75 32 62C36 49 38 36 34 22C32 15 28 8 28 8C28 8 29 18 26 28C23 38 16 48 12 60C8 72 6 86 10 100C14 114 24 126 32 136C40 146 52 148 52 148Z" fill="url(#flameGradient)" />
+    <!-- Detailed flame vector path matching Logo.JPG flame shape -->
+    <path d="M48 2C48 2 54 18 52 32C50 44 42 54 44 68C46 80 56 90 64 100C74 112 80 126 78 142C76 158 64 172 48 178C62 176 74 165 78 150C82 135 78 120 70 108C64 98 56 90 54 78C52 68 56 58 60 48C64 36 62 20 48 2Z" fill="#F26522"/>
+    <path d="M42 22C42 22 47 38 41 52C36 64 26 74 24 90C22 104 28 118 36 128C42 136 50 142 58 146C50 146 40 142 34 134C26 124 20 110 22 94C24 80 34 68 38 54C42 42 40 30 42 22Z" fill="#F88133"/>
+    <path d="M72 90C72 90 82 104 84 118C86 132 80 144 72 154C80 146 86 134 84 120C82 108 74 98 72 90Z" fill="#E64A19"/>
+    <!-- Authentic brush / organic flame contour matching the Logo.JPG art -->
+    <path d="M50 8C50 8 58 24 55 38C52 50 42 62 44 76C46 90 58 102 68 114C78 126 84 142 80 158C76 174 60 186 42 188C58 184 72 172 76 156C80 138 72 122 62 110C54 100 44 90 42 76C40 64 48 52 52 40C55 28 53 14 50 8Z" fill="#FF6D2C"/>
+    <path d="M36 40C36 40 40 54 36 68C32 80 22 92 20 106C18 120 24 134 32 144C24 136 18 122 20 108C22 94 30 82 34 70C38 58 36 48 36 40Z" fill="#FFA040"/>
+    <path d="M26 65C26 65 30 78 26 90C22 100 12 110 10 122C8 134 14 146 22 154C14 146 8 134 10 120C12 108 20 98 24 88C28 78 26 70 26 65Z" fill="#FF7A1A"/>
+  </g>
+
+  <defs>
+    <linearGradient id="flameGradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFA439"/>
+      <stop offset="60%" stop-color="#F26522"/>
+      <stop offset="100%" stop-color="#D84315"/>
+    </linearGradient>
+  </defs>
+
+  <!-- IMPACTO text in distressed / organic bold slab block style matching the JPG -->
+  <text x="30" y="148" fill="#F26522" font-family="'Impact', 'Oswald', 'Space Grotesk', sans-serif" font-weight="900" font-size="110" letter-spacing="4">IMPACTO</text>
+  
+  <!-- BURGER text in clean modern uppercase -->
+  <text x="140" y="194" fill="#F26522" font-family="'Space Grotesk', 'Oswald', 'Montserrat', sans-serif" font-weight="600" font-size="34" letter-spacing="11">BURGER</text>
+</svg>
