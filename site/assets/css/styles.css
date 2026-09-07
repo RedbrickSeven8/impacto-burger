@@ -1,0 +1,67 @@
+/* ==========================================================================
+   IMPACTO BURGER - ESTILOS BASE & COMPONENTES MODULARES
+   ========================================================================== */
+
+@layer base {
+  html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #131315;
+    color: #e5e1e4;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  
+  body {
+    overscroll-behavior: none;
+  }
+  
+  main > :first-child {
+    margin-top: 0 !important;
+  }
+  
+  main > :last-child {
+    margin-bottom: 0 !important;
+  }
+}
+
+/* ==========================================================================
+   ANIMACIÓN DEL HERO BURGER (3 FOTOGRAMAS - SUAVE & FLUIDA)
+   ========================================================================== */
+
+.hero-burger-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  padding: 0.5rem;
+  transition: opacity 0.65s cubic-bezier(0.25, 1, 0.5, 1), transform 0.65s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: opacity, transform;
+}
+
+/* Transiciones optimizadas de hover para botones y enlaces */
+.transition-smooth {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Mejoras de accesibilidad y foco */
+:focus-visible {
+  outline: 2px solid #ff5a1f;
+  outline-offset: 2px;
+}
+
+/* Scrollbar estilizada */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #131315;
+}
+::-webkit-scrollbar-thumb {
+  background: #353437;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ff5a1f;
+}
