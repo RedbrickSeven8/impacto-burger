@@ -25,7 +25,7 @@
 }
 
 /* ==========================================================================
-   ANIMACIÓN DEL HERO BURGER (GSAP TIMELINE)
+   ANIMACIÓN DEL HERO BURGER (GSAP TIMELINE CROSSFADE & BADGES)
    ========================================================================== */
 
 .hero-burger-frame {
@@ -37,6 +37,11 @@
   object-position: center;
   padding: 0.5rem;
   will-change: opacity, transform;
+}
+
+.ingredient-badge {
+  will-change: opacity, transform;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.6));
 }
 
 /* Transiciones optimizadas de hover para botones y enlaces */
