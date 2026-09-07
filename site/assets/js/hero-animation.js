@@ -1,7 +1,7 @@
 /**
  * Impacto Burger - Módulo de Animación Hero con GSAP Timeline
  * Secuencia de fotogramas fluida y continua usando GSAP.
- * Solo animación (SIN etiquetas de ingredientes).
+ * Zoom aplicado a 1.35 (35% más grande).
  * Se ejecuta al pasar el cursor por encima (hover).
  */
 
@@ -27,10 +27,10 @@ export function initHeroAnimation() {
     return;
   }
 
-  // Estado inicial: Frame 1 visible, el resto con opacidad 0
-  gsap.set(frames[0], { opacity: 1 });
+  // Estado inicial: Frame 1 visible a escala 1.35 (zoom 35%), los demás con opacidad 0
+  gsap.set(frames[0], { opacity: 1, scale: 1.35 });
   for (let i = 1; i < frames.length; i++) {
-    gsap.set(frames[i], { opacity: 0 });
+    gsap.set(frames[i], { opacity: 0, scale: 1.35 });
   }
 
   // Crear el Timeline de GSAP para recorrer todos los fotogramas en secuencia

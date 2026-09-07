@@ -25,7 +25,7 @@
 }
 
 /* ==========================================================================
-   ANIMACIÓN DEL HERO BURGER (GSAP TIMELINE FRAMES)
+   ANIMACIÓN DEL HERO BURGER (GSAP TIMELINE FRAMES - ZOOM 35% / SCALE 1.35)
    ========================================================================== */
 
 .hero-burger-frame {
@@ -36,7 +36,8 @@
   object-fit: contain;
   object-position: center;
   padding: 0.5rem;
-  will-change: opacity;
+  transform: scale(1.35);
+  will-change: opacity, transform;
 }
 
 /* Transiciones optimizadas de hover para botones y enlaces */
