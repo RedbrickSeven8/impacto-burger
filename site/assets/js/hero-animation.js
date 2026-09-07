@@ -39,7 +39,7 @@ export function initHeroAnimation() {
     defaults: { ease: 'none' }
   });
 
-  const frameDuration = 0.08; // Duración fluida entre cada fotograma
+  const frameDuration = 0.1; // Duración fluida entre cada fotograma
 
   for (let i = 0; i < frames.length - 1; i++) {
     const currentFrame = frames[i];
