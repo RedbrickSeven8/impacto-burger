@@ -134,52 +134,20 @@
 </a>
 </div>
 </div>
-<!-- Hero Visual (Exploded View Image) - 3-Frame Smooth Animation & Clickable Link to #menu -->
+<!-- Hero Visual (Exploded View Image) - GSAP Hover Frame Sequence Animation & Clickable Link to #menu -->
 <div class="order-1 lg:order-2 lg:col-span-6 relative flex items-center justify-center">
 <a href="#menu" id="hero-burger-link" aria-label="Ver la especialidad Onion Burger en el menú" class="relative block w-full max-w-[500px] lg:max-w-none aspect-square rounded-2xl overflow-hidden bg-surface-container-lowest shadow-2xl cursor-pointer group transition-transform duration-300 hover:scale-[1.02]">
-<!-- Smooth 3-Frame Container: Frame 1 -> Frame 2 -> Frame 3 with Ingredient Badges -->
+<!-- 9-Frame Animation Container -->
 <div class="relative w-full h-full overflow-hidden flex items-center justify-center">
-  <!-- Frame 1: Base Burger -->
-  <img loading="eager" fetchpriority="high" decoding="async" id="hero-burger-frame1" alt="Onion Burger Impacto - Fotograma Inicial" class="hero-burger-frame opacity-100 scale-100 z-10" src="assets/images/onion-burger-1.png">
-  <!-- Frame 2: Mid Transition Burger -->
-  <img loading="eager" fetchpriority="high" decoding="async" id="hero-burger-frame2" alt="Onion Burger Impacto - Fotograma Intermedio" class="hero-burger-frame opacity-0 scale-98 z-20" src="assets/images/onion-burger-2.png">
-  <!-- Frame 3: Exploded Layer Burger -->
-  <img loading="eager" fetchpriority="high" decoding="async" id="hero-burger-frame3" alt="Onion Burger Impacto - Fotograma Final Desglosado" class="hero-burger-frame opacity-0 scale-95 z-30" src="assets/images/onion-burger-3.jpg">
-
-  <!-- Floating Ingredient Badges (Revealed on Hover Timeline) -->
-  <div id="hero-ingredient-badges" class="absolute inset-0 z-40 pointer-events-none p-4 flex flex-col justify-between opacity-0">
-    <!-- Top Tags -->
-    <div class="flex justify-between items-start gap-2 pt-14 sm:pt-16">
-      <div class="ingredient-badge transform -translate-x-3 bg-surface-container-high/95 backdrop-blur-md px-2.5 py-1 rounded-lg border border-primary-container/40 shadow-lg flex items-center gap-1.5 text-[11px] font-bold text-on-surface">
-        <span class="w-2 h-2 rounded-full bg-primary-container shrink-0"></span>
-        <span>Pan Brioche Tostado</span>
-      </div>
-      <div class="ingredient-badge transform translate-x-3 bg-surface-container-high/95 backdrop-blur-md px-2.5 py-1 rounded-lg border border-secondary/40 shadow-lg flex items-center gap-1.5 text-[11px] font-bold text-on-surface">
-        <span class="w-2 h-2 rounded-full bg-secondary shrink-0"></span>
-        <span>Cebolla Caramelizada</span>
-      </div>
-    </div>
-    
-    <!-- Middle Tags -->
-    <div class="flex justify-between items-center gap-2">
-      <div class="ingredient-badge transform -translate-x-3 bg-surface-container-high/95 backdrop-blur-md px-2.5 py-1 rounded-lg border border-tertiary/40 shadow-lg flex items-center gap-1.5 text-[11px] font-bold text-on-surface">
-        <span class="w-2 h-2 rounded-full bg-tertiary shrink-0"></span>
-        <span>Queso Mozzarella</span>
-      </div>
-      <div class="ingredient-badge transform translate-x-3 bg-surface-container-high/95 backdrop-blur-md px-2.5 py-1 rounded-lg border border-amber-500/40 shadow-lg flex items-center gap-1.5 text-[11px] font-bold text-on-surface">
-        <span class="w-2 h-2 rounded-full bg-amber-500 shrink-0"></span>
-        <span>Tocineta Ahumada</span>
-      </div>
-    </div>
-
-    <!-- Bottom Tag -->
-    <div class="flex justify-center items-end pb-16 sm:pb-20">
-      <div class="ingredient-badge transform translate-y-3 bg-surface-container-high/95 backdrop-blur-md px-3 py-1 rounded-lg border border-red-500/40 shadow-lg flex items-center gap-1.5 text-[11px] font-bold text-on-surface">
-        <span class="w-2 h-2 rounded-full bg-red-500 shrink-0"></span>
-        <span>Carne Angus Premium 130g</span>
-      </div>
-    </div>
-  </div>
+  <img loading="eager" fetchpriority="high" decoding="async" class="hero-burger-frame opacity-100 scale-100 z-10" id="hero-frame-001" alt="Onion Burger Fotograma 1" src="assets/images/frames/ezgif-frame-001-HQ-Version.jpg">
+  <img loading="eager" fetchpriority="high" decoding="async" class="hero-burger-frame opacity-0 scale-100 z-10" id="hero-frame-005" alt="Onion Burger Fotograma 2" src="assets/images/frames/ezgif-frame-005-HQ-Version.jpg">
+  <img loading="eager" fetchpriority="high" decoding="async" class="hero-burger-frame opacity-0 scale-100 z-10" id="hero-frame-009" alt="Onion Burger Fotograma 3" src="assets/images/frames/ezgif-frame-009-HQ-Version.jpg">
+  <img loading="eager" fetchpriority="high" decoding="async" class="hero-burger-frame opacity-0 scale-100 z-10" id="hero-frame-013" alt="Onion Burger Fotograma 4" src="assets/images/frames/ezgif-frame-013-HQ-Version.jpg">
+  <img loading="eager" fetchpriority="high" decoding="async" class="hero-burger-frame opacity-0 scale-100 z-10" id="hero-frame-017" alt="Onion Burger Fotograma 5" src="assets/images/frames/ezgif-frame-017-HQ-Version.jpg">
+  <img loading="eager" fetchpriority="high" decoding="async" class="hero-burger-frame opacity-0 scale-100 z-10" id="hero-frame-021" alt="Onion Burger Fotograma 6" src="assets/images/frames/ezgif-frame-021-HQ-Version.jpg">
+  <img loading="eager" fetchpriority="high" decoding="async" class="hero-burger-frame opacity-0 scale-100 z-10" id="hero-frame-025" alt="Onion Burger Fotograma 7" src="assets/images/frames/ezgif-frame-025-HQ-Version.jpg">
+  <img loading="eager" fetchpriority="high" decoding="async" class="hero-burger-frame opacity-0 scale-100 z-10" id="hero-frame-029" alt="Onion Burger Fotograma 8" src="assets/images/frames/ezgif-frame-029-HQ-Version.jpg">
+  <img loading="eager" fetchpriority="high" decoding="async" class="hero-burger-frame opacity-0 scale-100 z-10" id="hero-frame-036" alt="Onion Burger Fotograma 9" src="assets/images/frames/ezgif-frame-036-HQ-Version.jpg">
 </div>
 <!-- Exploded Highlight floating tag -->
 <div class="absolute top-6 left-6 bg-surface-container-high/90 backdrop-blur-md px-space-md py-space-2xs rounded-lg shadow-md flex items-center gap-space-xs">
