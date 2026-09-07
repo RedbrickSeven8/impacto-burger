@@ -25,7 +25,7 @@
 }
 
 /* ==========================================================================
-   ANIMACIÓN DEL HERO BURGER (3 FOTOGRAMAS - SUAVE & FLUIDA)
+   ANIMACIÓN DEL HERO BURGER (GSAP TIMELINE)
    ========================================================================== */
 
 .hero-burger-frame {
@@ -36,7 +36,6 @@
   object-fit: contain;
   object-position: center;
   padding: 0.5rem;
-  transition: opacity 0.65s cubic-bezier(0.25, 1, 0.5, 1), transform 0.65s cubic-bezier(0.25, 1, 0.5, 1);
   will-change: opacity, transform;
 }
 

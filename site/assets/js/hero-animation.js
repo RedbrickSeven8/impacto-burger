@@ -1,7 +1,9 @@
 /**
- * Impacto Burger - Módulo de Animación Hero (3 Fotogramas)
- * Controla la transición suave y fluida:
- * Fotograma 1 (Base) -> Fotograma 2 (Medio/Despegue) -> Fotograma 3 (Explotada/Capas)
+ * Impacto Burger - Módulo de Animación Hero con GSAP Timeline
+ * Maneja la interacción en hover:
+ * - Reposicionamiento / Estado normal: Frame 1 (Burger Completa)
+ * - Hover (mouseenter): Timeline hacia Frame 2 (Medio) y Frame 3 (Exploded)
+ * - Mouseleave: Timeline reversible o regreso suave al Frame 1
  */
 
 export function initHeroAnimation() {
@@ -10,74 +12,55 @@ export function initHeroAnimation() {
   const frame3 = document.getElementById('hero-burger-frame3');
   const linkContainer = document.getElementById('hero-burger-link');
 
-  if (!frame1 || !frame2 || !frame3) return;
+  if (!frame1 || !frame2 || !frame3 || !linkContainer) return;
 
-  let animTimeout1 = null;
-  let animTimeout2 = null;
-  let isRunning = false;
-
-  // Estado 1: Inicio (Burger completa)
-  function showFrame1() {
-    frame1.style.opacity = '1';
-    frame1.style.transform = 'scale(1)';
-    frame2.style.opacity = '0';
-    frame2.style.transform = 'scale(0.97)';
-    frame3.style.opacity = '0';
-    frame3.style.transform = 'scale(0.94)';
+  // Asegurar que GSAP esté disponible
+  if (typeof gsap === 'undefined') {
+    console.warn('GSAP no está cargado. Se omite la animación del Hero.');
+    return;
   }
 
-  // Estado 2: Medio (Separación intermedia suave)
-  function showFrame2() {
-    frame1.style.opacity = '0';
-    frame1.style.transform = 'scale(1.02)';
-    frame2.style.opacity = '1';
-    frame2.style.transform = 'scale(1)';
-    frame3.style.opacity = '0';
-    frame3.style.transform = 'scale(0.97)';
-  }
+  // Configuración inicial de estados
+  gsap.set(frame1, { opacity: 1, scale: 1 });
+  gsap.set(frame2, { opacity: 0, scale: 0.96 });
+  gsap.set(frame3, { opacity: 0, scale: 0.92 });
 
-  // Estado 3: Final (Explosión completa de capas)
-  function showFrame3() {
-    frame1.style.opacity = '0';
-    frame1.style.transform = 'scale(1.05)';
-    frame2.style.opacity = '0';
-    frame2.style.transform = 'scale(1.03)';
-    frame3.style.opacity = '1';
-    frame3.style.transform = 'scale(1)';
-  }
+  // Crear Timeline pausado de GSAP
+  const tl = gsap.timeline({
+    paused: true,
+    defaults: { ease: 'power2.out' }
+  });
 
-  // Secuencia fluida 3 fotogramas
-  function play3FrameSequence() {
-    if (isRunning) return;
-    isRunning = true;
+  // Paso 1: Transición Frame 1 -> Frame 2
+  tl.to(frame1, {
+    opacity: 0,
+    scale: 1.03,
+    duration: 0.35
+  }, 0)
+  .to(frame2, {
+    opacity: 1,
+    scale: 1,
+    duration: 0.35
+  }, 0)
 
-    // Iniciar con Frame 1
-    showFrame1();
+  // Paso 2: Transición Frame 2 -> Frame 3 (Explosión)
+  .to(frame2, {
+    opacity: 0,
+    scale: 1.04,
+    duration: 0.45
+  }, 0.35)
+  .to(frame3, {
+    opacity: 1,
+    scale: 1,
+    duration: 0.45
+  }, 0.35);
 
-    // Transicionar al Frame 2 tras 350ms
-    animTimeout1 = setTimeout(() => {
-      showFrame2();
+  // Eventos de interacción Hover (solo se ejecuta al pasar el cursor)
+  linkContainer.addEventListener('mouseenter', () => {
+    tl.timeScale(1).play();
+  });
 
-      // Transicionar al Frame 3 tras otros 400ms para máxima suavidad
-      animTimeout2 = setTimeout(() => {
-        showFrame3();
-        isRunning = false;
-      }, 450);
-    }, 400);
-  }
-
-  // 1. Ejecución automática inicial al cargar la página
-  setTimeout(() => {
-    play3FrameSequence();
-  }, 600);
-
-  // 2. Repetición al pasar el cursor (hover)
-  if (linkContainer) {
-    linkContainer.addEventListener('mouseenter', () => {
-      clearTimeout(animTimeout1);
-      clearTimeout(animTimeout2);
-      isRunning = false;
-      play3FrameSequence();
-    });
-  }
+  linkContainer.addEventListener('mouseleave', () => {
+    tl.timeScale(1.4).reverse();
+  });
 }
